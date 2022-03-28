@@ -16,23 +16,16 @@ function MainPage(props) {
   const [savedData, setSaveData] = useState([]);
   const userId = props.match.params.userId;
 
-  // function handleChange(event) {
-  //   const { name, value } = event.target;
+  function handleChange(event) {
+    const { name, value } = event.target;
 
-  //   setInsertNote((prevNote) => {
-  //     return {
-  //       ...prevNote,
-  //       [name]: value,
-  //     };
-  //   });
-  // }
-  // function alert() {
-  //   return (
-  //     <Alert variant="filled" severity="success">
-  //       This is a success alert — check it out!
-  //     </Alert>
-  //   );
-  // }
+    setInsertNote((prevNote) => {
+      return {
+        ...prevNote,
+        [name]: value,
+      };
+    });
+  }
   function getData() {
     axios
       .get("http://localhost:4000/keeper/getKeeperDetails/" + userId)
@@ -45,19 +38,12 @@ function MainPage(props) {
         }
       })
       .catch((err) => {
-        // alert("type Something");
       });
   }
-  // getData();
   function submitNote(event) {
     event.preventDefault();
     console.log(insertNote);
-    // console.log(userId);
-    // if (insertNote.length) {
-    //   alert
-    // } else {
-    //   alert("Please fill details");
-    // }
+  
     setSubNote((prevItems) => {
       return [...prevItems, insertNote];
     });
@@ -80,27 +66,9 @@ function MainPage(props) {
     debugger;
     console.log("saved data :" + savedData);
     setInsertNote("");
-    // return (
-    //   <Alert variant="filled" severity="success">
-    //     This is a success alert — check it out!
-    //   </Alert>
-    // );
+   
   }
 
-  // function deleteNote(id) {
-  //   setSubNote((prevNotes) => {
-  //     return prevNotes.filter((note, index) => {
-  //       return index !== id;
-  //     });
-  //   });
-  // }
-
-  // function handleClick(event) {
-  //   console.log(event);
-  // const id = axios.delete("/deleteData/" + _id).then((res) => {
-  //   console.log(res.data);
-  // });
-  // }
 
   return (
     <div>
@@ -124,14 +92,6 @@ function MainPage(props) {
           </button>
         </form>
       </div>
-
-      {/* <div className="note">
-        <h1>{savedData.title}</h1>
-        <p>{savedData.content}</p>
-        <IconButton aria-label="delete" onClick={handleClick}>
-          <DeleteIcon />
-        </IconButton>
-      </div> */}
 
       <div>
         {savedData.map((savedNote, index) => (
